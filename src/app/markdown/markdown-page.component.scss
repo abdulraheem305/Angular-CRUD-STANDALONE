@@ -1,0 +1,23 @@
+.markdown-container {
+  padding: 1.5rem;
+  border-radius: 10px;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+}
+
+.markdown-output {
+  padding: 1rem;
+  border-left: 4px solid #1976d2;
+  margin-top: 1rem;
+}
+
+.markdown-output h1,
+.markdown-output h2,
+.markdown-output h3 {
+  color: #1976d2;
+}
+
+.markdown-output code {
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}

@@ -1,0 +1,37 @@
+{
+  "accounts": [
+    {
+      "id": "21c31591-e6c2-483a-9c3f-3de4bef88b3a",
+      "name": "Abdul Raheem",
+      "email": "abdulraheem770@gmail.com",
+      "password": "11221122"
+    }
+  ],
+  "users": [
+    {
+      "id": "3e112ba5-49b8-4159-936c-a70f40affe19",
+      "name": "Abdul Raheem",
+      "email": "abdulraheemdevelop@gmail.com"
+    },
+    {
+      "id": "d343d391-a133-4326-be25-d49819b18dff",
+      "name": "uzair",
+      "email": "uzair@ucp.com"
+    },
+    {
+      "id": "2714187f-9780-4ae8-b040-8ead9048dbf5",
+      "name": "ALI",
+      "email": "ali@ucp.com"
+    },
+    {
+      "id": "2e5766be-d22a-4851-a99c-9e6299a4b1c5",
+      "name": "Abdul Naveed",
+      "email": "abdulnaveedDCC@gmail.com"
+    },
+    {
+      "id": "888fb650-cad4-41b1-8c48-eebf0ae31a72",
+      "name": "Abdul Raheem",
+      "email": "l1f20bsse0162@ucp.edu.pk"
+    }
+  ]
+}

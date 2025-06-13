@@ -1,0 +1,21 @@
+<div class="advanced-tax-container">
+  <h2>Pakistan Tax Calculator (2026)</h2>
+
+  <form [formGroup]="taxForm" (ngSubmit)="calculateTax()">
+    <label for="income">Annual Salary (PKR):</label>
+    <input type="number" formControlName="income" required />
+
+    <label for="mode">View As:</label>
+    <select formControlName="mode">
+      <option value="yearly">Yearly</option>
+      <option value="monthly">Monthly</option>
+    </select>
+
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div *ngIf="taxAmount !== null">
+    <h3 *ngIf="mode === 'yearly'">Yearly Tax Payable: PKR {{ taxAmount | number : '1.0-0' }}</h3>
+    <h3 *ngIf="mode === 'monthly'">Monthly Tax Payable: PKR {{ monthlyTax | number : '1.0-0' }}</h3>
+  </div>
+</div>

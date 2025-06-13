@@ -1,0 +1,31 @@
+<div class="container">
+  <h2 class="main-heading">Dashboard</h2>
+  <h2 class="user-heading">Add Users</h2>
+  <form #form="ngForm" (ngSubmit)="onSubmit(!user.id)" class="user-form">
+    <input [(ngModel)]="user.name" name="name" placeholder="Name" required />
+    <input [(ngModel)]="user.email" name="email" placeholder="Email" required />
+    <button type="submit" [disabled]="form.invalid">
+      {{ user.id ? "Update" : "Add" }}
+    </button>
+    <button type="button" (click)="resetForm()">Clear</button>
+  </form>
+
+  <div class="search-bar">
+    <label for="searchInput">Search Users</label>
+    <input
+      id="searchInput"
+      [(ngModel)]="searchText"
+      name="search"
+      placeholder="Search by name or email..."
+    />
+  </div>
+
+  <app-user-list
+    [users]="users | userSearch : searchText"
+    [searchText]="searchText"
+    (edit)="editUser($event)"
+    (delete)="deleteUser($event)"
+  ></app-user-list>
+
+  <p *ngIf="(users | userSearch : searchText).length == 0">No users found.</p>
+</div>

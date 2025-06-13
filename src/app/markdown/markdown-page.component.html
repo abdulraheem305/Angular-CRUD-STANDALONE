@@ -1,0 +1,11 @@
+<div class="markdown-container">
+  <h2>Angular Built-in Pipes</h2>
+  <p><strong>Full Date:</strong> {{ currentDate | date:'fullDate' }}</p>
+  <p><strong>Uppercase Name:</strong> {{ name | uppercase }}</p>
+  <p><strong>Formatted Salary:</strong> {{ salary | currency:'USD' }}</p>
+
+  <hr>
+
+  <h2>Rendered Markdown</h2>
+  <div class="markdown-output" [innerHTML]="markdownText | markdown"></div>
+</div>

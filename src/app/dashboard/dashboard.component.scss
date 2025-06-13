@@ -1,0 +1,67 @@
+.container {
+  padding: 1rem;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+  .main-heading {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  .user-heading {
+    font-size: 1rem;
+  }
+  input {
+    padding: 0.5rem;
+    border: 2px solid #c5c3c3;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 40%;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+  }
+
+  .search-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    label {
+      font-weight: bold;
+      color: #333;
+    }
+  }
+
+  .user-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    input {
+      flex: 1;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  .user-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 0.5rem;
+      border-bottom: 1px solid #ddd;
+
+      button {
+        margin-left: 1rem;
+      }
+    }
+  }
+}

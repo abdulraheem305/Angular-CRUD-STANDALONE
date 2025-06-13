@@ -1,0 +1,15 @@
+<div class="auth-wrapper">
+<div class="auth-container">
+  <h2>Sign Up</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <input formControlName="name" type="text" placeholder="Name">
+    <input formControlName="email" type="email" placeholder="Email">
+    <input formControlName="password" type="password" placeholder="Password">
+    <button type="submit">Sign Up</button>
+  </form>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+  <p>Already have an account? <a routerLink="/login">Login</a></p>
+</div>
+</div>
+

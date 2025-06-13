@@ -1,0 +1,15 @@
+<h2>Combined User Info</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name (from accounts)</th>
+      <th>Email (from users)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of combinedData">
+      <td>{{ data.name }}</td>
+      <td>{{ data.email }}</td>
+    </tr>
+  </tbody>
+</table>

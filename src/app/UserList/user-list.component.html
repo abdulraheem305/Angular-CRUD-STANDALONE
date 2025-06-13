@@ -1,0 +1,21 @@
+<table class="user-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of users; index as i">
+      <td>{{ i + 1 }}</td>
+      <td>{{ u.name }}</td>
+      <td>{{ u.email }}</td>
+      <td class="actions">
+        <button class="edit-btn" (click)="onEdit(u)">Edit</button>
+        <button class="delete-btn" (click)="onDelete(u.id!)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
