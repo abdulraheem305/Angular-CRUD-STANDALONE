@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { combineLatest, delay, forkJoin, from, of } from 'rxjs';
+
+type Mode = 'yearly' | 'monthly';
 
 @Component({
   selector: 'app-advanced-tax-calculator',
@@ -14,36 +15,53 @@ export class AdvancedTaxCalculatorComponent {
   taxForm: FormGroup;
   taxAmount: number | null = null;
   monthlyTax: number | null = null;
-  mode: 'monthly' | 'yearly' = 'yearly';
+  mode: Mode = 'monthly';
 
-  constructor(private  readonly fb: FormBuilder) {
+  constructor(private readonly fb: FormBuilder) {
     this.taxForm = this.fb.group({
-      income: [0],
-      mode: ['yearly']
+      income: [null, [Validators.required, Validators.min(1)]],
+      mode: ['monthly' as Mode]
     });
   }
 
   calculateTax(): void {
-    const data= false;
-    if(!data) return;
-    const income = this.taxForm.value.income;
-    this.mode = this.taxForm.value.mode;
-    this.taxAmount = this.getTax2026(income);
-    this.monthlyTax= this.mode === 'monthly'?this.taxAmount / 12:null;
-    
+    if (this.taxForm.invalid) {
+      this.taxForm.markAllAsTouched();
+      return;
+    }
+
+    const { income, mode } = this.taxForm.value;
+    this.mode = mode;
+
+    const yearlyIncome = mode === 'monthly' ? income * 12 : income;
+    this.taxAmount = this.getTax2026(yearlyIncome);
+    this.monthlyTax = mode === 'monthly' ? this.taxAmount / 12 : null;
   }
 
-  getTax2026(income: number): number {
-    if (income <= 600000) return 0;
-    else if (income <= 1200000) return (income - 600000) * 0.01;
-    else if (income <= 1800000) return 6000 + (income - 1200000) * 0.05;
-    else if (income <= 2400000) return 36000 + (income - 1800000) * 0.075;
-    else if (income <= 3000000) return 81000 + (income - 2400000) * 0.11;
-    else if (income <= 3600000) return 147000 + (income - 3000000) * 0.13;
-    else if (income <= 4200000) return 225000 + (income - 3600000) * 0.15;
-    else if (income <= 4800000) return 315000 + (income - 4200000) * 0.175;
-    else if (income <= 5400000) return 420000 + (income - 4800000) * 0.20;
-    else if (income <= 6000000) return 540000 + (income - 5400000) * 0.225;
-    else return 675000 + (income - 6000000) * 0.25;
+  private getTax2026(income: number): number {
+    const brackets = [
+      { limit: 600000, base: 0, rate: 0 },
+      { limit: 1200000, base: 0, rate: 0.01 },
+      { limit: 1800000, base: 6000, rate: 0.05 },
+      { limit: 2400000, base: 36000, rate: 0.075 },
+      { limit: 3000000, base: 81000, rate: 0.11 },
+      { limit: 3600000, base: 147000, rate: 0.13 },
+      { limit: 4200000, base: 225000, rate: 0.15 },
+      { limit: 4800000, base: 315000, rate: 0.175 },
+      { limit: 5400000, base: 420000, rate: 0.20 },
+      { limit: 6000000, base: 540000, rate: 0.225 },
+      { limit: Infinity, base: 675000, rate: 0.25 }
+    ];
+
+    for (let i = 0; i < brackets.length; i++) {
+      const current = brackets[i];
+      const previousLimit = i === 0 ? 0 : brackets[i - 1].limit;
+
+      if (income <= current.limit) {
+        return current.base + (income - previousLimit) * current.rate;
+      }
+    }
+
+    return 0;
   }
 }

@@ -1,5 +1,6 @@
 <div class="container">
   <h2 class="main-heading">Dashboard</h2>
+
   <h2 class="user-heading">Add Users</h2>
   <form #form="ngForm" (ngSubmit)="onSubmit(!user.id)" class="user-form">
     <input [(ngModel)]="user.name" name="name" placeholder="Name" required />
@@ -21,11 +22,13 @@
   </div>
 
   <app-user-list
-    [users]="users | userSearch : searchText"
+    [users]="users() | userSearch : searchText"
     [searchText]="searchText"
     (edit)="editUser($event)"
     (delete)="deleteUser($event)"
   ></app-user-list>
 
-  <p *ngIf="(users | userSearch : searchText).length == 0">No users found.</p>
+  <p *ngIf="(users() | userSearch : searchText).length === 0">
+    No users found.
+  </p>
 </div>

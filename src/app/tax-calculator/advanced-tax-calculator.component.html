@@ -2,10 +2,18 @@
   <h2>Pakistan Tax Calculator (2026)</h2>
 
   <form [formGroup]="taxForm" (ngSubmit)="calculateTax()">
-    <label for="income">Annual Salary (PKR):</label>
-    <input type="number" formControlName="income" required />
+    <label for="income">Enter Salary (PKR):</label>
+    <input
+      type="number"
+      formControlName="income"
+      placeholder="Enter the amount"
+      [class.invalid]="taxForm.get('income')?.invalid && taxForm.get('income')?.touched"
+    />
+    <div class="error" *ngIf="taxForm.get('income')?.invalid && taxForm.get('income')?.touched">
+      Salary is required and must be greater than 0.
+    </div>
 
-    <label for="mode">View As:</label>
+    <label for="mode">Salary Mode:</label>
     <select formControlName="mode">
       <option value="yearly">Yearly</option>
       <option value="monthly">Monthly</option>

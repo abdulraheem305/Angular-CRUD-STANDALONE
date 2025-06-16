@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IUser } from '../interfaces/user.interfaces';
-import { UserService } from './user.service';
-import { UserListComponent } from "../UserList/user-list.component"
 import { v4 as uuidv4 } from 'uuid';
-import { AuthService } from '../services/auth.service';
-import { Observable } from 'rxjs';
-import { UserSearchPipe } from '../pipes/user-search.pipe';
 import { ToastrService } from 'ngx-toastr';
+
+import { DashboardService } from './dashboard.service';
+import { AuthService } from '../services/auth.service';
+import { IUser } from '../interfaces/user.interfaces';
+import { UserListComponent } from '../UserList/user-list.component';
+import { UserSearchPipe } from '../pipes/user-search.pipe';
 
 @Component({
   selector: 'app-user',
@@ -16,37 +16,30 @@ import { ToastrService } from 'ngx-toastr';
   imports: [CommonModule, FormsModule, UserListComponent, UserSearchPipe],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  providers: [UserService]
+  providers: [DashboardService]
 })
-export class UserComponent implements OnInit {
-  public users: IUser[] = [];
+export class DashboardComponent implements OnInit {
+  public users = inject(DashboardService).getUsers();
+  public searchText = '';
   public user: IUser = { name: '', email: '', id: '' };
-  public searchText: string = '';
-  public username: string = '';
+  public username = '';
 
-  constructor(
-    private userService: UserService,
-    private authService: AuthService,
-    private toastr: ToastrService
-  ) { }
+  private readonly dashboardService = inject(DashboardService);
+  private readonly authService = inject(AuthService);
+  private readonly toastr = inject(ToastrService);
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(user => {
-      if (user) {
-        this.username = user.name;
-      }
-    });
-
-    this.loadUsers();
-  }
-
-  private loadUsers(): void {
-    this.userService.getUsers().subscribe(users => this.users = users);
+    const current = this.authService.currentUser();
+    this.username = current?.name ?? '';
   }
 
   public onSubmit(isAdd: boolean): void {
+    const currentUsers = this.users();
+
     if (isAdd) {
-      const emailExists = this.users.some(u => u.email.toLowerCase() === this.user.email.toLowerCase());
+      const emailExists = currentUsers.some(
+        u => u.email.toLowerCase() === this.user.email.toLowerCase()
+      );
       if (emailExists) {
         this.toastr.error('Email already exists!', 'Duplicate Email');
         return;
@@ -54,22 +47,22 @@ export class UserComponent implements OnInit {
       this.user.id = uuidv4();
     }
 
-    const action: Observable<IUser> = isAdd
-      ? this.userService.addUser(this.user)
-      : this.userService.updateUser(this.user);
+    const action = isAdd
+      ? this.dashboardService.addUser(this.user)
+      : this.dashboardService.updateUser(this.user);
 
     action.subscribe(() => {
-      this.loadUsers();
       this.resetForm();
       this.toastr.success(`User ${isAdd ? 'added' : 'updated'} successfully`, 'Success');
     });
   }
+
   public editUser(user: IUser): void {
     this.user = { ...user };
   }
 
   public deleteUser(id: string): void {
-    this.userService.deleteUser(id).subscribe(() => this.loadUsers());
+    this.dashboardService.deleteUser(id).subscribe();
   }
 
   public resetForm(): void {

@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import { UserComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainLayoutComponent } from "./layout/main-layout.component"
 import { MarkdownPageComponent } from './markdown/markdown-page.component';
 import { UserCombinedComponent } from './user-combine/user-combined.component';
 import { AdvancedTaxCalculatorComponent } from './tax-calculator/advanced-tax-calculator.component';
+import { CgpaCalculatorComponent } from './cgpa-calculator/cgpa-calculator.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -15,10 +16,11 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'dashboard/:id', component: UserComponent, title: 'Dashboard' },
+      { path: 'dashboard/:id', component: DashboardComponent, title: 'Dashboard' },
       { path: 'markdown', component: MarkdownPageComponent, title: 'Dashboard' },
       { path: 'combine-user', component: UserCombinedComponent, title: 'Combine User' },
-      { path: 'tax-calculator', component: AdvancedTaxCalculatorComponent, title: 'Tax Calculator' }
+      { path: 'tax-calculator', component: AdvancedTaxCalculatorComponent, title: 'Tax Calculator' },
+      { path: 'cgpa-calculator', component: CgpaCalculatorComponent, title: 'CGPA Calculator' }
 
     ]
   },

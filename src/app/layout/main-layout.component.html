@@ -1,22 +1,7 @@
-<app-header [username]="username"></app-header>
+<app-header [username]="username()"></app-header>
 
 <div class="layout">
-  <aside class="sidebar">
-    <ul>
-      <li *ngIf="encryptedId">
-        <a [routerLink]="['/dashboard', encryptedId]" routerLinkActive="active">
-          Dashboard</a
-        >
-      </li>
-      <li><a routerLink="/markdown" routerLinkActive="active">Mark Down</a></li>
-      <li>
-        <a routerLink="/combine-user" routerLinkActive="active">Combine User</a>
-      </li>
-       <li>
-        <a routerLink="/tax-calculator" routerLinkActive="active">Tax Calculator</a>
-      </li>
-    </ul>
-  </aside>
+  <app-sidebar [encryptedId]="encryptedId()"></app-sidebar>
 
   <main class="main-content">
     <router-outlet></router-outlet>

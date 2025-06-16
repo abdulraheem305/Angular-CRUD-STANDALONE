@@ -1,37 +1,31 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent } from "../sharedHeader/header.component";
+import { HeaderComponent } from '../shared/sharedHeader/header.component';
+import { SidebarComponent } from '../shared/shard-sidebar/sidebar.component';
 import { AuthService } from '../services/auth.service';
-import { CommonModule } from '@angular/common'; 
-import { Subject, takeUntil } from 'rxjs';
-import { encryptId } from '../utils/encryption';
 
 @Component({
-    selector: 'app-main-layout',
-    standalone: true,
-    imports: [RouterModule, HeaderComponent, CommonModule],
-    templateUrl: './main-layout.component.html',
-    styleUrls: ['./main-layout.component.scss']
+  selector: 'app-main-layout',
+  standalone: true,
+  imports: [RouterModule, HeaderComponent, SidebarComponent],
+  templateUrl: './main-layout.component.html',
+  styleUrls: ['./main-layout.component.scss']
 })
+export class MainLayoutComponent {
+  private readonly authService = inject(AuthService);
 
-export class MainLayoutComponent implements OnInit {
-  public username = '';
-  public encryptedId = '';
+  private readonly _username = signal('');
+  private readonly _encryptedId = signal('');
 
-  constructor(private authService: AuthService) {}
 
-  public ngOnInit(): void {
-    const user = this.authService.getCurrentUser();
-    if (user) {
-      this.username = user.name;
-      this.encryptedId = this.authService.getEncryptedId() ?? '';
-    }
+  readonly username = computed(() => this._username());
+  readonly encryptedId = computed(() => this._encryptedId());
 
-    this.authService.currentUser$.subscribe(user => {
-      if (user) {
-        this.username = user.name;
-        this.encryptedId = this.authService.getEncryptedId() ?? '';
-      }
+  constructor() {
+    effect(() => {
+      const user = this.authService.currentUser();
+      this._username.set(user?.name ?? '');
+      this._encryptedId.set(this.authService.getEncryptedId() ?? '');
     });
   }
 }
