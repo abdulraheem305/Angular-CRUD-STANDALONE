@@ -7,11 +7,13 @@
       type="number"
       formControlName="income"
       placeholder="Enter the amount"
-      [class.invalid]="taxForm.get('income')?.invalid && taxForm.get('income')?.touched"
+      [class.invalid]="
+        taxForm.get('income')?.invalid && taxForm.get('income')?.touched
+      "
     />
-    <div class="error" *ngIf="taxForm.get('income')?.invalid && taxForm.get('income')?.touched">
-      Salary is required and must be greater than 0.
-    </div>
+    @if (taxForm.get('income')?.invalid && taxForm.get('income')?.touched) {
+    <div class="error">Salary is required and must be greater than 0.</div>
+    }
 
     <label for="mode">Salary Mode:</label>
     <select formControlName="mode">
@@ -22,8 +24,9 @@
     <button type="submit">Calculate</button>
   </form>
 
-  <div *ngIf="taxAmount !== null">
-    <h3 *ngIf="mode === 'yearly'">Yearly Tax Payable: PKR {{ taxAmount | number : '1.0-0' }}</h3>
-    <h3 *ngIf="mode === 'monthly'">Monthly Tax Payable: PKR {{ monthlyTax | number : '1.0-0' }}</h3>
-  </div>
+  @if (taxAmount !== null) { @if (mode === 'yearly') {
+  <h3>Yearly Tax Payable: PKR {{ taxAmount | number : "1.0-0" }}</h3>
+  } @else if (mode === 'monthly') {
+  <h3>Monthly Tax Payable: PKR {{ monthlyTax | number : "1.0-0" }}</h3>
+  } }
 </div>

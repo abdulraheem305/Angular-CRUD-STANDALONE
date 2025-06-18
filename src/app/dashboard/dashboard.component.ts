@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastrService } from 'ngx-toastr';
-
 import { DashboardService } from './dashboard.service';
 import { AuthService } from '../services/auth.service';
 import { IUser } from '../interfaces/user.interfaces';
@@ -13,7 +12,7 @@ import { UserSearchPipe } from '../pipes/user-search.pipe';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, FormsModule, UserListComponent, UserSearchPipe],
+  imports: [ CommonModule, FormsModule, UserListComponent, UserSearchPipe],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [DashboardService]

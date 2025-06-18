@@ -6,7 +6,11 @@
       <input formControlName="password" type="password" placeholder="Password">
       <button type="submit">Login</button>
     </form>
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+
     <p>Don't have an account? <a routerLink="/signup">Sign up</a></p>
   </div>
 </div>

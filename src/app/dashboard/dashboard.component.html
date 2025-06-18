@@ -28,7 +28,7 @@
     (delete)="deleteUser($event)"
   ></app-user-list>
 
-  <p *ngIf="(users() | userSearch : searchText).length === 0">
-    No users found.
-  </p>
+  @if ((users() | userSearch : searchText).length === 0) {
+  <p>No users found.</p>
+  }
 </div>

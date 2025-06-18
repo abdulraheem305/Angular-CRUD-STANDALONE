@@ -1,4 +1,3 @@
-// src/app/markdown-page/markdown-page.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MarkdownPipe } from '../pipes/markdown.pipe';

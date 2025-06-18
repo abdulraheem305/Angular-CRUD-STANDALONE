@@ -62,6 +62,62 @@
       "id": "08e31f4b-f7cf-4b9e-b9bd-eeb4312de7aa",
       "name": "Abdul Naveed",
       "email": "abdulNaveed@ucp.com"
+    },
+    {
+      "id": "f9e6c7f0-1205-4f92-8c6b-f710e79e14eb",
+      "name": "Abdul Raheem",
+      "email": "abdulraheemdeveloper@gmail.com"
+    }
+  ],
+  "company": [
+    {
+      "id": "c1",
+      "name": "TechNova Solutions",
+      "description": "A leading software development firm providing custom web and mobile app solutions.",
+      "industry": "Software Development",
+      "location": "Lahore, Pakistan",
+      "email": "contact@technova.com",
+      "website": "https://www.technova.com",
+      "revenue": "5M USD",
+      "founded": "2015",
+      "employees": 120,
+      "socials": {
+        "linkedin": "https://linkedin.com/company/technova",
+        "twitter": "https://twitter.com/technovasol",
+        "facebook": "https://facebook.com/technovasol"
+      }
+    },
+    {
+      "id": "c2",
+      "name": "GreenLeaf Pvt Ltd",
+      "description": "GreenLeaf is an agriculture company focused on organic farming and exports.",
+      "industry": "Agriculture",
+      "location": "Karachi, Pakistan",
+      "email": "info@greenleaf.pk",
+      "website": "https://www.greenleaf.pk",
+      "revenue": "2.3M USD",
+      "founded": "2010",
+      "employees": 85,
+      "socials": {
+        "linkedin": "https://linkedin.com/company/greenleafpk",
+        "twitter": "https://twitter.com/greenleafpk"
+      }
+    },
+    {
+      "id": "c3",
+      "name": "SkyReach Enterprises",
+      "description": "A telecommunications company providing internet and mobile services across Pakistan.",
+      "industry": "Telecommunications",
+      "location": "Islamabad, Pakistan",
+      "email": "support@skyreach.com",
+      "website": "https://www.skyreach.com",
+      "revenue": "15M USD",
+      "founded": "2008",
+      "employees": 300,
+      "socials": {
+        "linkedin": "https://linkedin.com/company/skyreach",
+        "facebook": "https://facebook.com/skyreach"
+      }
     }
   ]
 }

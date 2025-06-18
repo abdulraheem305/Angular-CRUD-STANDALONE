@@ -36,11 +36,17 @@
   display: block;
   padding: 8px;
   color: white;
+  font-weight: bold;
   text-decoration: none;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   text-align: center;
   border-radius: 4px;
 }
-
+.sidebar a:hover {
+  background-color: white;
+  color: #007bff;
+}
 .sidebar a.active {
   font-weight: bold;
   color: #007bff;

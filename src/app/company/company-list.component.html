@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <div class="row">
+    @if (companies$ | async; as companies) { 
+    @for (company of companies; track company.id) {
+    <div class="mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <div>
+            <h5 class="card-title">{{ company.name }}</h5>
+            <h6 class="card-subtitle">Location: {{ company.location }}</h6>
+            <p class="card-text">Description: {{ company.description }}</p>
+            <div class="badge">Industry: {{ company.industry }}</div>
+            <div class="revenue">Revenue: {{ company.revenue }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    } }
+  </div>
+</div>

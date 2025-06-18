@@ -1,13 +1,16 @@
 <aside class="sidebar">
   <div class="sidebar-content">
     <ul>
-      <li *ngIf="encryptedId">
-        <a [routerLink]="['/dashboard', encryptedId]" routerLinkActive="active">Dashboard</a>
-      </li>
+      @if (encryptedId) {
+        <li>
+          <a [routerLink]="['/dashboard', encryptedId]" routerLinkActive="active">Dashboard</a>
+        </li>
+      }
       <li><a routerLink="/markdown" routerLinkActive="active">Mark Down</a></li>
       <li><a routerLink="/combine-user" routerLinkActive="active">Combine User</a></li>
       <li><a routerLink="/tax-calculator" routerLinkActive="active">Tax Calculator</a></li>
       <li><a routerLink="/cgpa-calculator" routerLinkActive="active">CGPA Calculator</a></li>
+      <li><a routerLink="/company" routerLinkActive="active">Company</a></li>
     </ul>
   </div>
 
@@ -15,4 +18,3 @@
     <button class="logout-btn" (click)="onLogout()">Logout</button>
   </div>
 </aside>
-

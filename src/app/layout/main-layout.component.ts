@@ -13,10 +13,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class MainLayoutComponent {
   private readonly authService = inject(AuthService);
-
   private readonly _username = signal('');
   private readonly _encryptedId = signal('');
-
 
   readonly username = computed(() => this._username());
   readonly encryptedId = computed(() => this._encryptedId());
